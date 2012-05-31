@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- Jerry Pennell -->
+<!-- Term 1206 -->
+<html>
 <head>
+<!-- begining of meta data tags for browsers -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="Description" content="Comic collection application" />
 <meta name="Keywords" content="comics,collectible,marvel,DC,html5" />
@@ -9,13 +12,32 @@
 <meta name="robots" content="index, follow" />
 <meta name="viewport" content="width=device-width,user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes"/>
-<title>Untitled Document</title>
+
+<title>Add Comic</title>
+<!-- begining of css -->
+<style type="text/css">
+   .alig{
+	   margin-left:10px;
+   }
+</style>
 </head>
-
+<!-- body begins -->
 <body>
-
-<form action="action" method="get" name="input" id="input">
+<h1>Add Comic</h1>
+<form action="additem.html" method="get" name="input" id="input">
+<fieldset>
+ <legend>Comic Data:</legend>
 <table>
+    <tr>
+      <td>Publisher:</td>
+      <td><select>
+          <option value="marvel">Marvel</option>
+          <option value="dc">DC</option>
+          <option value="image">Image</option>
+          <option value="darkhorse">Dark Horse</option>
+		</select>
+      </td>
+    </tr>
     <tr>
       <td>Comic name:</td>
       <td> <input type="text" name="comicName" /></td>
@@ -30,11 +52,11 @@
       <td>Rating:</td>
       <td><input type="range" name="rating" id="rating" min="0" max="10" step="1" value="0" onchange="display_rate.value=this.value" /><output name="display_rate" for="rating"></output></td>
     </tr>
-      
+  
      <tr>
         <td>Have it?</td>
-     	<td><input type="radio" name="haveit" value="yes" /> Yes 
-            <input type="radio" name="haveit" value="no" /> No 
+     	<td><label for="yes">Yes</label> <input type="radio" name="haveit" value="yes" id="yes"/>
+            <label for="no">No</label><input type="radio" name="haveit" value="no" id="no"/> 
         </td>
     </tr>
     <tr>
@@ -46,12 +68,16 @@
       <td><textarea rows="4" cols="25"></textarea></td>
     </tr>
     <tr>
-      <td><input type="submit" value="Submit" /></td>
       <td></td>
+      <td class="alig"><input type="submit" value="Add Data" /><input type="reset" value="Clear Form" /></td>
     </tr>
-    
+    <!-- clear data and display data for later reference -->
+    <tr>
+      <td><a href="#">clear stored data</a></td>
+      <td> <a href="#">display data</a></td>
+     </tr>
 </table>
-
+</fieldset>
 </form> 
 </body>
 </html>
