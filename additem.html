@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="Description" content="Comic collection application" />
+<meta name="Keywords" content="comics,collectible,marvel,DC,html5" />
+<meta name="author" content="Jerry Pennell" />
+<meta charset="utf-8" />
+<meta name="robots" content="index, follow" />
+<meta name="viewport" content="width=device-width,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<title>Untitled Document</title>
+</head>
+
+<body>
+
+<form action="action" method="get" name="input" id="input">
+<table>
+    <tr>
+      <td>Comic name:</td>
+      <td> <input type="text" name="comicName" /></td>
+    </tr>
+    
+    <tr>
+      <td>Issue:</td>
+      <td><input type="text" name="issue" /></td>
+    </tr>
+    
+     <tr>
+      <td>Rating:</td>
+      <td><input type="range" name="rating" id="rating" min="0" max="10" step="1" value="0" onchange="display_rate.value=this.value" /><output name="display_rate" for="rating"></output></td>
+    </tr>
+      
+     <tr>
+        <td>Have it?</td>
+     	<td><input type="radio" name="haveit" value="yes" /> Yes 
+            <input type="radio" name="haveit" value="no" /> No 
+        </td>
+    </tr>
+    <tr>
+        <td>Published:</td>
+        <td><input type="date" name="publishdate" /></td>
+    </tr>
+    <tr>
+      <td>Notes:</td>
+      <td><textarea rows="4" cols="25"></textarea></td>
+    </tr>
+    <tr>
+      <td><input type="submit" value="Submit" /></td>
+      <td></td>
+    </tr>
+    
+</table>
+
+</form> 
+</body>
+</html>
