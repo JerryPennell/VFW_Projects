@@ -14,14 +14,14 @@ window.addEventListener("DOMContentLoaded", function(){
      
      
      //Create select field element and populate with options
-     function makeCats(){
+     function makeComics(){
          var     formTag = document.getElementsByTagName("form"), //formTag is an array of all the form tags
 		 selectLi    = $('select'),
 		 makeSelect  = document.createElement('select');
 		 makeSelect.setAttribute("id","groups");
-         for(var i=0, j=contactGroups.length; i<j; i++){
+         for(var i=0, j=comicGroups.length; i<j; i++){
              var makeOption = document.createElement('option');
-             var optText = contactGroups[i];
+             var optText = comicGroups[i];
              makeOption.setAttribute("value", optText);
              makeOption.innerHTML = optText;
              makeSelect.appendChild(makeOption);
@@ -51,13 +51,13 @@ window.addEventListener("DOMContentLoaded", function(){
      function toggleControls(n){
         switch(n){
             case "on":
-                 $('contactForm').style.display ="none";
+                 $('comicForm').style.display ="none";
                  $('clear').style.display="inline";
                  $('displayLink').style.display ="none";
                  $('addNew').style.display = "inline";
                  break;
             case "off":
-                 $('contactForm').style.display ="block";
+                 $('comicForm').style.display ="block";
 		 $('clear').style.display="inline";
 		 $('displayLink').style.display ="inline";
                  $('addNew').style.display = "none";
@@ -91,7 +91,7 @@ window.addEventListener("DOMContentLoaded", function(){
           //Save all the data into local storage Use Stringify to convert our object to a string.          
           localStorage.setItem(id, JSON.stringify(item));    
 		  console.log("This is an id: " +id);               
-          alert("Contact Saved");
+          alert("Comic Saved");
       }
       
       function getData(){
@@ -130,7 +130,7 @@ window.addEventListener("DOMContentLoaded", function(){
                 alert("There is no data to clear.");
            }else{
                localStorage.clear();
-               alert("All contacts deleted.");
+               alert("All comics deleted.");
                window.location.reload();
                return false;
            }
@@ -140,11 +140,11 @@ window.addEventListener("DOMContentLoaded", function(){
       
      
      //variable defaults
-     var contactGroups = ["-- Choose A Publisher --", "DC","Marvel","Image","Dark Horse"],
+     var comicGroups = ["-- Choose A Publisher --", "DC","Marvel","Image","Dark Horse"],
          haveitValue,
          needValue = "No"
      ;         
-     makeCats();
+     makeComics();
      
      
      //Set Link & Submit Click Events
