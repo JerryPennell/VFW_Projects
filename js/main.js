@@ -5,6 +5,7 @@
 
 //Wait until the DOM is ready
 window.addEventListener("DOMContentLoaded", function(){
+	
 
      //getElementById function
      function $(x){
@@ -58,8 +59,8 @@ window.addEventListener("DOMContentLoaded", function(){
                  break;
             case "off":
                  $('comicForm').style.display ="block";
-		 $('clear').style.display="inline";
-		 $('displayLink').style.display ="inline";
+		         $('clear').style.display="inline";
+		         $('displayLink').style.display ="inline";
                  $('addNew').style.display = "none";
                  $('items').style.display = "none";
                  break;
@@ -121,6 +122,9 @@ window.addEventListener("DOMContentLoaded", function(){
                 var optSubText = obj[n][0]+" "+obj[n][1];
                 makeSubli.innerHTML = optSubText;
              }
+			  var addHl = document.createElement('hr');
+			  addHl.setAttribute("id","genlist");
+		      makeSubList.appendChild(addHl);
          }
       }
       

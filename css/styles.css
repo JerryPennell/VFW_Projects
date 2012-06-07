@@ -5,15 +5,18 @@
    
 /* iPhone [portrait + landscape] */
 @media screen and (max-device-width: 485px){
-	body{...}
-	div{...}
-	#nav,#nav li{...}
-	img{
-	  max-width:100%;
-	  height:auto;
-	}
+	
+/* All iPhone only CSS goes here */
+img{
+     max-width:100%;
+     height:auto;
+    }
+
+
 }
-.button {
+
+/* Button for launching the app */
+ .button {
    border-top: 1px solid #96d1f8;
    background: #65a9d7;
    background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
@@ -53,6 +56,116 @@
    
 /* addItem.html */
 
+.subbtn {
+   float:right;
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   padding: 10px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 15px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   text-align:center;
+   display:block;
+   
+   }
+
    .alig{
 	   margin-left:10px;
    }
+   
+ /* style for heading bar */  
+   
+#heading {
+	margin: 0;
+    padding: 0;
+	background-color: #ccc;
+    border-bottom: 1px solid #666;
+    color: #222;
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* style for input fields */
+
+	.input input{
+	float:left;
+	font-size:12px;
+	padding:4px 2px;
+	border:solid 1px #069;
+	width:150px;
+	margin:2px 0 10px 10px;
+	}
+	
+	li {
+	color: #B4886B;
+	font-weight: bold;
+	display: block;
+	width: auto;
+	margin-top:5px;
+	margin-bottom:5px;
+	}
+ 
+/* border background and outline of fieldset */
+
+   fieldset {
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;   
+	border: 1px solid # 333;
+	background: #F7FAED;
+	padding: 3px;
+	margin-top:10px;
+   }
+   
+ /*fieldset legend color tab */  
+   
+   fieldset legend {
+	-webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;   
+	border: 1px solid # 333;      
+	background: #CCA383;
+	padding: 6px;
+	font-weight: bold;
+	}
+	
+/* test links for clear data, display data, add data */
+	
+	.sublinks {
+		color:#39C;
+		text-decoration:none;
+		margin:15px;
+			
+	}
+	
+	.sublinks:hover {
+		 color:#003399;
+		 text-decoration: underline overline;
+	}
+	
+
+ /* for js elements */
+ 
+    #genlist {
+		border: 0;
+		color: #f00;
+		background-color: #06C;
+		height: 5px;
+	}
