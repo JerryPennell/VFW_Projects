@@ -1,4 +1,5 @@
-//Activity 2
+//Jerry Pennell 1206
+//Project 2
 //Visual Framworks (VFW)
 //Mobile Development
 //Full Sail University
@@ -150,7 +151,7 @@ window.addEventListener("DOMContentLoaded", function(){
          haveitValue,																	   //Holding value for if we have it
          needValue = "No"																   //default needs appraisal value
      ;         
-     makeComics();																//calls the function for making the comics list
+     makeComics();															               //calls the function for making the comics list
      
      
      //Set Link & Submit Click Events
