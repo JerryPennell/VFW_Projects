@@ -1,5 +1,5 @@
 //Jerry Pennell 1206
-//Project 2
+//Project 3
 //Visual Framworks (VFW)
 //Mobile Development
 //Full Sail University
@@ -73,8 +73,16 @@ window.addEventListener("DOMContentLoaded", function(){
      
      
      //Save data into local storage
-     function storeData(){       
-          var id             = Math.floor(Math.random()*10000001);
+     function storeData(key){       
+          //If there is no key, this means this is a brand new item and we need a new key.
+	      if(!key){			  
+              var id             = Math.floor(Math.random()*10000001);
+		  }else{
+			  //Set the id to the existing key we're editing so that it will save over the data
+			  //The key is the same key that's been passed along from the editSubmit event handler
+			  //to the validate function, and then passed here, into the storeData function			  
+			  id = key;
+		  }
           //Gather up all our form field values and store in an object
           //Object properties contain array with the form label and input value
           getSelectedRadio();													//Checks the selected radio button
@@ -112,6 +120,7 @@ window.addEventListener("DOMContentLoaded", function(){
          $('items').style.display = "display";									//sets style for items to display
          for(var i=0, len=localStorage.length; i<len; i++){						//itterate the local storage
              var makeli = document.createElement('li');							//makes li tag
+             var linksLi = document.createElement('li');					    //makes li tag for links edit-delete
              makeList.appendChild(makeli);										//appends li to ul
              var key = localStorage.key(i); 									//key for localstorage objects
              var value = localStorage.getItem(key);								//value of the object by key
@@ -124,12 +133,92 @@ window.addEventListener("DOMContentLoaded", function(){
                 makeSubList.appendChild(makeSubli);								//appends to sublist li
                 var optSubText = obj[n][0]+" "+obj[n][1];						//gets the text in the object
                 makeSubli.innerHTML = optSubText;								//adds the innerHtml element for the text
+                makeSubList.appendChild(linksLi);
              }
+              makeItemLinks(localStorage.key(i), linksLi);                      //Create our edit and delete buttons/link for 
 			  var addHl = document.createElement('hr');							//adds a horizontal rule seperator for look
 			  addHl.setAttribute("id","genlist");								//adds id attribute for css to add styles
 		      makeSubList.appendChild(addHl);									//appends the element to the end of the ul set
          }
       }
+      
+      //Create the edit and delete links for each stored item when displayed
+	  function makeItemLinks(key, linksLi){
+		  //add edit single item link
+		  var editLink = document.createElement('a');							//Creates anchor tag
+		  editLink.href = "#";													//sets the value to pound tag
+		  editLink.key = key;													//gets the key for the item being edited
+		  var editText = "Edit Comic";									    	//Creates text of Edit contact
+		  editLink.addEventListener("click", editItem);							//Adds the event listener for the edit item link
+		  editLink.innerHTML = editText;										//adds the link to the html
+		  linksLi.appendChild(editLink);										//by appending the edit link
+		  
+		  //add line break
+		  var breakTag = document.createElement('br');							//Adds a break to create the element spacing
+		  linksLi.appendChild(breakTag);										//Appends the break tag
+		  
+		  //add delete single item link
+		  var deleteLink = document.createElement('a');							//adds an anchor tag for the delete link
+		  deleteLink.href = "#";												//adds the link value to pound going same page
+		  deleteLink.key = key;													//sets the key to the comic being deleted
+		  var deleteText = "Delete Comic";										//creates the text to delete the comic
+		  deleteLink.addEventListener("click", deleteItem);						//adds the event listener to delete the item
+		  deleteLink.innerHTML = deleteText;									//adds the link to the html
+		  linksLi.appendChild(deleteLink);										//appends the deletelink child 
+	  }
+	  
+	  
+	  // Edits an Item from the list 
+	  function editItem(){
+		  //Grab the data from our item from Local Storage
+		  var value = localStorage.getItem(this.key);							//gets the item the selected key item from localStorage
+		  var item = JSON.parse(value);											//parses the retrieved value
+		  
+		  //Show the form
+		  toggleControls("off");												//shows the form
+		  
+		  //populate the form fields with current localStorage values.
+		  $('groups').value = item.publisher[1];								//gets the stored key value of publisher
+		  $('cname').value = item.cname[1];										//gets the stored key value of the comic name
+		  $('iname').value = item.iname[1];										//gets the stored key value element of issue
+		  $('email').value = item.email[1];										//gets the stored key value element of email 
+		  var radios = document.forms[0].haveit;								//checks the value of the radio stored button value
+		  for(var i=0; i<radios.length; i++){									//itterate the radio set
+			  if(radios[i].value == "Yes" && item.haveit[1] == "Yes"){			//checking which values should be set
+				  radios[i].setAttribute("checked", "checked");
+			  }else if(radios[i].value == "No" && item.haveit[1] == "No"){		//if not yes value set the no value in set
+				  radios[i].setAttribute("checked", "checked");
+			  }
+		  }
+		  if(item.need[1] == "Yes"){											//reviews the checkbox to see if it should be checked
+			  $('need').setAttribute("checked", "checked");
+		  }
+		  $('rating').value = item.rating[1];									//calls the rating value by key
+		  $('date').value = item.date[1];										//gets the date value by key
+		  $('notes').value = item.notes[1];										//gets the stored notes value by key
+		  
+		  //Remove the intial listener from the input 'save contact' button.
+		  save.removeEventListener("click", storeData);
+		  //change Submit Button value to Edit Button
+		  $('submit').value = "Edit Contact";
+		  var editSubmit = $('submit');
+		  //Save the key value established in this function as a property of the editSubmit event
+		  //so we can use that value when we save the data we edited
+		  editSubmit.addEventListener("click", validate);						//sets the validate listener to the edit submit
+		  editSubmit.key = this.key;											//sets to key to the selected key edited
+	  }
+	  
+	  //Deletes an item from the list
+	  function deleteItem(){
+		  var ask = confirm("Are you sure you want to delete this contact?");	//confirmation to delete the contact
+		  if(ask){																//if yes its ok to delete
+			  localStorage.removeItem(this.key);								//removed the key from local storage
+			  alert("Contact was deleted!!");									//tells us the contact was deleted
+			  window.location.reload();											//reloads the window
+		  }else{
+			  alert("Contact was NOT deleted.");								//Otherwise the contact was not deleted
+		  }
+	  }																		   //each item in local storage
       
       //Clear all data
       function clearLocal()  {
@@ -144,12 +233,72 @@ window.addEventListener("DOMContentLoaded", function(){
        }
          
  
-      
+      function validate(e){														//Validates the input fields
+		 //Define the elements we want to check 
+		 var getGroup = $('groups');											//variable of the group of comic names was choosen
+		 var getCname = $('cname');												//variable a name was put in for the comic name
+		 var getIname = $('iname');												//variable to see if an issue number was put in
+		 var getEmail = $('email');												//variabel set to field email
+		 
+		 //Reset Error Message
+		 errMsg.innerHTML = "";
+		 getGroup.style.border ="1px solid black";								//comic publisher border set back to orginal type
+		 getCname.style.border ="1px solid black";								//comic name border field set back to orginal color
+		 getIname.style.border ="1px solid black";								//comic issue name set back to orginal color
+		 getEmail.style.border ="1px solid black";								//email border for field set back to orginal color
+		 
+		 //Get Error Messages
+		 var messageAry = [];
+		 //Group Validation
+		 if(getGroup.value === "--Choose A Publisher --"){					    //validates the comic publisher
+			 var groupError = "Please choose a comic publisher.";				//error message choosing a publisher
+			 getGroup.style.border ="1px solid red";							//changes the field to show an error
+			 messageAry.push(groupError);										//adds the error to the array
+		 }
+		 
+		 //Comic Name Validation
+		if(getCname.value === ""){												//validates that a comic name has been added
+			 var cNameError = "Please enter a comic name.";						//asking to enter a comic name
+			 getGroup.style.border ="1px solid red";							//sets the comic name as errored
+			 messageAry.push(cNameError);										//adding the item to the error array
+		 }
+		 
+		 //Issue Validation
+		 if(getIname.value === ""){												//validates an issue has been added
+			 var iNameError = "Please enter a issue number.";					//error text to enter an issue number
+			 getGroup.style.border ="1px solid red";							//red error for the field value
+			 messageAry.push(iNameError);										//adds the error to the error array
+		 }
+		 
+		 //Email Validation
+		 var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;				//regular expression to validate the email is in correct format
+		 if(!(re.exec(getEmail.value))){										//if the value does not pass the regular expression
+			 var emailError = "Please enter a valid email address.";			//creates the error text for the invalid email address
+			 getEmail.style.border = "1px solid red";							//sets the field to red for the email address if invalid
+			 messageAry.push(emailError);										//puts the error in the error array 
+		 }
+		 
+		 //If there were errors, display them on the screen
+		 if(messageAry.length >= 1){
+		   for(var i=0, j=messageAry.length; i < j; i++){						//itterate the error array to get the errors out
+			   var txt = document.createElement('li');							//creates an li element for the errors text items
+			   txt.innerHTML = messageAry[i];									//puts them in the innerHTML from the array
+			   errMsg.appendChild(txt);											//appends the errors list items to the html
+		   }
+		    e.preventDefault();													//prevents the default
+		    return false;														//returns false for validation
+		 }else{
+			 //If all is ok, save our data. Send the  key value (which came from the editData function).
+			 //Remember this key value was passed through the editSubmit event listener as a property.
+			 storeData(this.key);
+		 }
+	 }
      
      //variable defaults
      var comicGroups = ["-- Choose A Publisher --", "DC","Marvel","Image","Dark Horse"],   //List of comics to be passed in for the select
          haveitValue,																	   //Holding value for if we have it
-         needValue = "No"																   //default needs appraisal value
+         needValue = "No"  																   //default needs appraisal value
+         errMsg = $('errors');
      ;         
      makeComics();															               //calls the function for making the comics list
      
@@ -161,7 +310,7 @@ window.addEventListener("DOMContentLoaded", function(){
      var clearLink =$('clear');													// gets the tag id called clear 
      clearLink.addEventListener("click", clearLocal);					        //assigns an event listener of click to clearLocal data function for id tag clear
      var save = $('submit');													//gets the tag id called submit
-     save.addEventListener("click", storeData);									//adds the eventlistener of click to call storeData
+     save.addEventListener("click", validate);									//adds the eventlistener of click to call validate before storeData
 
 
 
