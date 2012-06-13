@@ -117,7 +117,7 @@ window.addEventListener("DOMContentLoaded", function(){
          var makeList = document.createElement('ul');							//creates ul tag
          makeDiv.appendChild(makeList);											//appends ul to div tag
          document.body.appendChild(makeDiv);									//appends div tag with its child to body tag
-         $('items').style.display = "display";									//sets style for items to display
+         $('items').style.display = "block";									//sets style for items to display
          for(var i=0, len=localStorage.length; i<len; i++){						//itterate the local storage
              var makeli = document.createElement('li');							//makes li tag
              var linksLi = document.createElement('li');					    //makes li tag for links edit-delete
@@ -194,11 +194,13 @@ window.addEventListener("DOMContentLoaded", function(){
 			  $('need').setAttribute("checked", "checked");
 		  }
 		  $('rating').value = item.rating[1];									//calls the rating value by key
+		  document.forms[0].display_rate.value = item.rating[1];                //sets the visible rating 
 		  $('date').value = item.date[1];										//gets the date value by key
 		  $('notes').value = item.notes[1];										//gets the stored notes value by key
 		  
 		  //Remove the intial listener from the input 'save contact' button.
 		  save.removeEventListener("click", storeData);
+		  
 		  //change Submit Button value to Edit Button
 		  $('submit').value = "Edit Contact";
 		  var editSubmit = $('submit');
@@ -250,7 +252,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		 //Get Error Messages
 		 var messageAry = [];
 		 //Group Validation
-		 if(getGroup.value === "--Choose A Publisher --"){					    //validates the comic publisher
+		 if(getGroup.value === "-- Choose A Publisher --"){					    //validates the comic publisher
 			 var groupError = "Please choose a comic publisher.";				//error message choosing a publisher
 			 getGroup.style.border ="1px solid red";							//changes the field to show an error
 			 messageAry.push(groupError);										//adds the error to the array
@@ -259,14 +261,14 @@ window.addEventListener("DOMContentLoaded", function(){
 		 //Comic Name Validation
 		if(getCname.value === ""){												//validates that a comic name has been added
 			 var cNameError = "Please enter a comic name.";						//asking to enter a comic name
-			 getGroup.style.border ="1px solid red";							//sets the comic name as errored
+			 getCname.style.border ="1px solid red";							//sets the comic name as errored
 			 messageAry.push(cNameError);										//adding the item to the error array
 		 }
 		 
 		 //Issue Validation
 		 if(getIname.value === ""){												//validates an issue has been added
 			 var iNameError = "Please enter a issue number.";					//error text to enter an issue number
-			 getGroup.style.border ="1px solid red";							//red error for the field value
+			 getIname.style.border ="1px solid red";							//red error for the field value
 			 messageAry.push(iNameError);										//adds the error to the error array
 		 }
 		 
@@ -282,6 +284,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		 if(messageAry.length >= 1){
 		   for(var i=0, j=messageAry.length; i < j; i++){						//itterate the error array to get the errors out
 			   var txt = document.createElement('li');							//creates an li element for the errors text items
+			   txt.style.color = "red";
 			   txt.innerHTML = messageAry[i];									//puts them in the innerHTML from the array
 			   errMsg.appendChild(txt);											//appends the errors list items to the html
 		   }
