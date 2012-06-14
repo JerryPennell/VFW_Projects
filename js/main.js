@@ -148,7 +148,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		  var editLink = document.createElement('a');							//Creates anchor tag
 		  editLink.href = "#";													//sets the value to pound tag
 		  editLink.key = key;													//gets the key for the item being edited
-		  var editText = "Edit Comic";									    	//Creates text of Edit contact
+		  var editText = "Edit Comic";									    	//Creates text of Edit comic
 		  editLink.addEventListener("click", editItem);							//Adds the event listener for the edit item link
 		  editLink.innerHTML = editText;										//adds the link to the html
 		  linksLi.appendChild(editLink);										//by appending the edit link
@@ -198,11 +198,11 @@ window.addEventListener("DOMContentLoaded", function(){
 		  $('date').value = item.date[1];										//gets the date value by key
 		  $('notes').value = item.notes[1];										//gets the stored notes value by key
 		  
-		  //Remove the intial listener from the input 'save contact' button.
+		  //Remove the intial listener from the input 'save comic' button.
 		  save.removeEventListener("click", storeData);
 		  
 		  //change Submit Button value to Edit Button
-		  $('submit').value = "Edit Contact";
+		  $('submit').value = "Edit Comic";
 		  var editSubmit = $('submit');
 		  //Save the key value established in this function as a property of the editSubmit event
 		  //so we can use that value when we save the data we edited
@@ -212,15 +212,15 @@ window.addEventListener("DOMContentLoaded", function(){
 	  
 	  //Deletes an item from the list
 	  function deleteItem(){
-		  var ask = confirm("Are you sure you want to delete this contact?");	//confirmation to delete the contact
+		  var ask = confirm("Are you sure you want to delete this comic?");	    //confirmation to delete the comic
 		  if(ask){																//if yes its ok to delete
 			  localStorage.removeItem(this.key);								//removed the key from local storage
-			  alert("Contact was deleted!!");									//tells us the contact was deleted
+			  alert("Comic was deleted!!");									    //tells us the comic was deleted
 			  window.location.reload();											//reloads the window
 		  }else{
-			  alert("Contact was NOT deleted.");								//Otherwise the contact was not deleted
+			  alert("Comic was NOT deleted.");								    //Otherwise the comic was not deleted
 		  }
-	  }																		   //each item in local storage
+	  }																		    //each item in local storage
       
       //Clear all data
       function clearLocal()  {
