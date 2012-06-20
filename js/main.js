@@ -1,5 +1,5 @@
 //Jerry Pennell 1206
-//Project 3
+//Project 4
 //Visual Framworks (VFW)
 //Mobile Development
 //Full Sail University
@@ -109,7 +109,8 @@ window.addEventListener("DOMContentLoaded", function(){
       function getData(){
          toggleControls("on");													//Turns on the controls for display 
          if(localStorage.length === 0){											//Checks to see if items are in local storage
-           alert("There is no data in Local Storage");							//alert prompt there is no data found
+           alert("There is no data in Local Storage so default data was added.");  //alert there is no localstorage data
+		   autoFillData(); 							                            //alert prompt there is no data found
          }
          //Write Data from Local Storage to the browser.
          var makeDiv = document.createElement('div');							//creates a div tag 
@@ -128,6 +129,7 @@ window.addEventListener("DOMContentLoaded", function(){
              var obj = JSON.parse(value);										//Json parsing of object
              var makeSubList = document.createElement('ul');				    //creates the sublist ul element
              makeli.appendChild(makeSubList);									//appends to li ul element
+			 getImage(obj.publisher[1], makeSubList);								//adds image for identification
              for(var n in obj){													//itterates the item in the object
                 var makeSubli = document.createElement('li');					//creates element li 
                 makeSubList.appendChild(makeSubli);								//appends to sublist li
@@ -141,6 +143,28 @@ window.addEventListener("DOMContentLoaded", function(){
 		      makeSubList.appendChild(addHl);									//appends the element to the end of the ul set
          }
       }
+	  
+	  //New Get the image for the right category
+
+	  function getImage(catName, makeSubList){
+		  var imageLi = document.createElement('li');
+		  makeSubList.appendChild(imageLi);
+		  var newImg = document.createElement('img');
+		  var setSrc = newImg.setAttribute("src", "images/"+ catName + ".png");
+		  imageLi.appendChild(newImg);
+	  }
+
+	  
+
+	  //Auto Populate Local Storage
+	  function autoFillData(){
+		  //The actual JSON Object data required for this to work is coming from our json.js file
+		  //Store the JSON Object into Local Storage
+		  for(var n in json){
+			  var id  = Math.floor(Math.random()*10000001);
+			  localStorage.setItem(id, JSON.stringify(json[n]));
+		  }
+	  }
       
       //Create the edit and delete links for each stored item when displayed
 	  function makeItemLinks(key, linksLi){

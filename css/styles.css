@@ -2,7 +2,7 @@
 /* CSS Document */
 /* Jerry Pennell*/
 /* Term 1206    */
-/* Project 3    */
+/* Project 4    */
    
 /* iPhone [portrait + landscape] */
 @media screen and (max-device-width: 485px){
@@ -14,6 +14,14 @@ img{
     }
 
 
+}
+
+ul {
+	-webkit-padding-start: 5px;
+}
+
+#questions{
+	-webkit-padding-start: 40px;
 }
 
 /* Button for launching the app */
