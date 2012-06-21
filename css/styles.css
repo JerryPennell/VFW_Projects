@@ -15,6 +15,22 @@ img{
 
 
 }
+ /* style for heading bar */  
+ 
+body > header h1{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 10px;
+    line-height: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: rgba(0,0,0,.4) 0 1px 0;
+    text-overflow: ellipsis;
+    color: #FFFFFF;
+    background: url(../images/iPhoneToolbar.png) #6d84a2 repeat-x;
+    border-bottom: 1px solid #2d3642;
+}
 
 ul {
 	-webkit-padding-start: 5px;
@@ -22,6 +38,12 @@ ul {
 
 #questions{
 	-webkit-padding-start: 40px;
+}
+
+#loadarea{
+	 display:block;
+	 padding-top:120px;
+	 
 }
 
 /* Button for launching the app */
@@ -90,26 +112,24 @@ ul {
    display:block;
    
    }
+   
+   .subbtn:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+  
+   .subbtn:active {
+	border-top-color: #1b435e;
+	background: #1b435e;
+	text-align: center;
+   }
 
    .alig{
 	   margin-left:10px;
    }
    
- /* style for heading bar */  
-   
-#heading {
-	margin: 0;
-    padding: 0;
-	background-color: #ccc;
-    border-bottom: 1px solid #666;
-    color: #222;
-    display: block;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 10px 0;
-    text-align: center;
-    text-decoration: none;
-}
+
 
 /* style for input fields */
 
@@ -130,6 +150,7 @@ ul {
 	margin-top:5px;
 	margin-bottom:5px;
 	}
+	
  
 /* border background and outline of fieldset */
 
@@ -173,8 +194,7 @@ ul {
  /* for js elements */
  
     #genlist {
-		border: 0;
-		color: #f00;
-		background-color: #06C;
-		height: 5px;
+	border: 0;
+	background-color: #666;
+	height: 5px;
 	}
