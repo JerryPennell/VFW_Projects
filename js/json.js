@@ -1,3 +1,11 @@
+//Jerry Pennell 1206
+//Project 4
+//Visual Framworks (VFW)
+//Mobile Development
+//Full Sail University
+
+
+//json examples for test data
 var json = {
 	"comic1":{
 		"publisher": ["Publisher:","Marvel"],
